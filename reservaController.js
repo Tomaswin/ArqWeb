@@ -17,6 +17,22 @@ exports.index = function (req, res) {
         });
     });
 };
+
+exports.index = function (req, res) {
+  Reserva.findById(req.params.reserva_date, function (err, reserva) {
+      if (err) {
+        res.json({
+            status: "error",
+            message: err,
+        });
+      }
+      res.json({
+        status: "success",
+        message: "Reservas retrieved successfully",
+        data: reserva
+      });
+  });
+};
 // Handle create contact actions
 exports.new = function (req, res) {
     var reserva = new Reserva();
@@ -53,7 +69,7 @@ exports.update = function (req, res) {
         if (err)
             res.send(err);
         reserva.name = req.body.name ? req.body.name : reserva.name;
-        reserva.gender = req.body.gender;
+        reserva.date = req.body.date;
         reserva.email = req.body.email;
         reserva.phone = req.body.phone;
 // save the contact and check for errors

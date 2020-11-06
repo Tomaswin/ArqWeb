@@ -20,6 +20,9 @@ router.route('/reserva/:reserva_id')
     .put(reservaController.update)
     .delete(reservaController.delete);
 
+router.route('reserva/:reserva_date')
+    .get(reservaController.index);
+
 
 // Export API routes
 module.exports = router;
